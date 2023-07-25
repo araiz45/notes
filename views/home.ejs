@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NotePad</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+</head>
+
+<body>
+
+  <div class="container">
+    <form method="post" action="/" class="mb-4">
+      <div class="mb-3">
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="task"
+          placeholder="Enter Task😁"></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    <p style="font-weight: 700;">Show result : <%= count %>
+    </p>
+    <div class="list-group">
+      <% task.forEach((task)=>{ %>
+        <a href="#" class="list-group-item list-group-item-action" aria-current="true">
+          <div class="d-flex w-100 justify-content-between">
+            <p class="mb-1">
+              <%= task.work %>
+            </p>
+            <small style="color: rgb(127, 134, 127); font-weight: 700; font-style: italic;">
+              <%= task.createdAt.toLocaleString() %>
+            </small>
+          </div>
+          <form action="/<%= task.id %>?_method=DELETE" method="post" style="display: inline-block;">
+            <button type="submit" class="btn btn-outline-danger btn-sm">Delete</button>
+          </form>
+          <a type="submit" class="btn btn-outline-warning btn-sm" href="/edit/<%= task.id %>">Edit</a>
+        </a>
+        <% }) %>
+
+    </div>
+    <nav aria-label="Page navigation example">
+      <ul class="pagination" id="pagination">
+        <li class="page-item"><a class="<%= count %>" href="#" id="hide" hidden></a></li>
+      </ul>
+    </nav>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+    crossorigin="anonymous"></script>
+
+  <script>
+    let next = document.getElementById("next");
+    let pre = document.getElementById("previous");
+    let count = document.getElementById("hide").getAttribute("class");
+
+
+    count = parseInt(count)
+    if (count >= 5) {
+      let add = Math.floor(count / 5);
+      for (i = 0; i <= add; i++) {
+        let pageination = document.getElementById("pagination")
+        let li = document.createElement("li");
+        let a = document.createElement("a")
+        li.setAttribute("class", "page-item")
+        li.textContent = "";
+        a.setAttribute("class", "page-link");
+        a.setAttribute("href", "/?q=" + String(i));
+        a.innerText = String(i + 1)
+        li.appendChild(a);
+        pageination.appendChild(li);
+      }
+    }
+
+  </script>
+</body>
+
+</html>
