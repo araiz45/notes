@@ -23,7 +23,7 @@
     </p>
     <div class="list-group">
       <% task.forEach((task)=>{ %>
-        <a href="#" class="list-group-item list-group-item-action" aria-current="true">
+        <div href="#" class="list-group-item list-group-item-action" aria-current="true">
           <div class="d-flex w-100 justify-content-between">
             <p class="mb-1">
               <%= task.work %>
@@ -36,7 +36,7 @@
             <button type="submit" class="btn btn-outline-danger btn-sm">Delete</button>
           </form>
           <a type="submit" class="btn btn-outline-warning btn-sm" href="/edit/<%= task.id %>">Edit</a>
-        </a>
+        </div>
         <% }) %>
 
     </div>
